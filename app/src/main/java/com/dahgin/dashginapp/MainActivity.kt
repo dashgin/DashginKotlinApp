@@ -33,50 +33,35 @@ class MainActivity : AppCompatActivity() {
         val root = binding.root
         setContentView(root)
 
-
         binding.fab.setOnClickListener {
             startActivity(Intent(this, CalendarActivity::class.java))
         }
-
         pushNotf()
-
         val tasksView = binding.tasksContainer
-
         Data.tasks.forEach { task ->
             val cardBinding = TaskCardBinding.inflate(layoutInflater)
             cardBinding.title.text = task.title
             cardBinding.description.text = task.description
             cardBinding.time.text = LocalTime.of(task.hour, task.min).toString()
             setNotification(task)
-
             tasksView.addView(cardBinding.root)
         }
-
-
     }
 
     private fun pushNotf() {
         Handler().postDelayed({
             notificationManager.notify(id++, builder.build())
             pushNotf()
-        },5000)
+        },25000)
     }
 
     private fun setNotification(task: Task) {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         val intent = Intent(this, MainActivity::class.java)
-
-
-        val pendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-
-//        val contentView = RemoteViews(packageName, R.layout.activity_main)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel =
-                NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+            notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.GREEN
             notificationChannel.enableVibration(false)
@@ -105,8 +90,7 @@ class MainActivity : AppCompatActivity() {
                         this.resources,
                         R.drawable.ic_launcher_foreground
                     )
-                )
-                .setContentIntent(pendingIntent)
+                ).setContentIntent(pendingIntent)
         }
     }
 
