@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:viewBindingIgnore="false"
+    android:padding="16dp"
+    tools:context=".CalendarActivity">
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="25dp"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:id="@+id/date"
+        />
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Schedule Task" />
+</LinearLayout>
